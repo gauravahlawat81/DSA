@@ -23,6 +23,7 @@ class LinkedList
     void insert_at_head(int);
     void insert_after(int,int);
     void print_list();
+    void deletion(int);
     LinkedList();
 };
 
@@ -117,6 +118,39 @@ void LinkedList::insert_after(int val,int to_be_inserted)
     
 }
 
+void LinkedList::deletion(int value)
+{
+    Node *temp = new Node();
+    temp=start;
+    if(temp->data == value)
+    {
+        if(temp->next!=NULL)
+        {
+            start=temp->next;
+            return ;
+        }
+        else
+        {
+            start=NULL;
+            return ;
+        }
+        
+    }
+    while(temp->next->data != value and temp->next!=NULL)
+    {
+        temp=temp->next;
+    }
+    if(temp->next->data == value)
+    {
+        temp->next=temp->next->next;
+    }
+    else
+    {
+        cout<<"Given value doesn't exist\n";
+    }
+    
+}
+
 int main()
 {
     LinkedList ll;
@@ -130,6 +164,9 @@ int main()
     ll.print_list();
     ll.insert_after(11,12);
     cout<<"After the insert after\n";
+    ll.print_list();
+    cout<<"Deleting 5\n";
+    ll.deletion(5);
     ll.print_list();
     return 0;
 }
