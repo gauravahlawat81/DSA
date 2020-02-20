@@ -24,6 +24,9 @@ class LinkedList
     void insert_after(int,int);
     void print_list();
     void deletion(int);
+    int getLength();
+    bool search_for_element(int);
+    int return_middle_element();
     LinkedList();
 };
 
@@ -151,6 +154,45 @@ void LinkedList::deletion(int value)
     
 }
 
+int LinkedList::getLength()
+{
+    Node *temp = new Node();
+    temp =start;
+    int count = 0;
+    while(temp)
+    {
+        temp=temp->next;
+        count++;
+    }
+    return count;
+}
+
+bool LinkedList::search_for_element(int value)
+{
+    Node *temp;
+    temp = start;
+    while(temp->next!=NULL and temp->data != value)
+    {
+        temp=temp->next;
+    }
+    if(temp and temp->data == value)
+    {
+        return true;
+    }
+    return false;
+}
+
+int LinkedList::return_middle_element()
+{
+    Node *single_jump=start,*double_jump=start;
+    while(double_jump!=NULL and double_jump->next!=NULL)
+    {
+        single_jump=single_jump->next;
+        double_jump=double_jump->next->next;
+    }
+    return single_jump->data;
+
+}
 int main()
 {
     LinkedList ll;
@@ -168,5 +210,7 @@ int main()
     cout<<"Deleting 5\n";
     ll.deletion(5);
     ll.print_list();
+    cout<<"Length of given list "<<ll.getLength()<<"\n";
+    cout<<"Middle of element is "<<ll.return_middle_element()<<"\n";
     return 0;
 }
